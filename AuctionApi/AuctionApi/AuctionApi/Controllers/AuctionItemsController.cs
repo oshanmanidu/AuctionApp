@@ -1,0 +1,518 @@
+﻿//using AuctionApi.Data;
+//using AuctionApi.Hubs;
+//using AuctionApi.Models;
+//using Microsoft.AspNetCore.Authorization;
+//using Microsoft.AspNetCore.Mvc;
+//using Microsoft.AspNetCore.SignalR;
+//using Microsoft.EntityFrameworkCore;
+//using System.Security.Claims;
+//using System.IO;
+
+//namespace AuctionApi.Controllers
+//{
+//    [ApiController]
+//    [Route("api/[controller]")]
+//    [Authorize(Roles = "User,Admin")]
+//    public class AuctionItemsController : ControllerBase
+//    {
+//        private readonly AppDbContext _context;
+//        private readonly IHubContext<NotificationHub> _hubContext;
+
+//        public AuctionItemsController(AppDbContext context, IHubContext<NotificationHub> hubContext)
+//        {
+//            _context = context;
+//            _hubContext = hubContext;
+//        }
+
+//        // GET: api/auctionitems
+//        [HttpGet]
+//        public async Task<ActionResult<IEnumerable<AuctionItem>>> GetItems()
+//        {
+//            try
+//            {
+//                var items = await _context.AuctionItems
+//                    .Include(a => a.User)
+//                    .Include(a => a.Bids)
+//                        .ThenInclude(b => b.User)
+//                    .ToListAsync();
+
+//                var result = items.Select(a => new
+//                {
+//                    a.Id,
+//                    a.Name,
+//                    a.Description,
+//                    a.StartingPrice,
+//                    a.CreatedAt,
+//                    a.ImageUrl,
+//                    a.BidStartTime,
+//                    a.BidEndTime,
+//                    a.CurrentHighestBid,
+//                    IsBiddingOpen = a.IsBiddingOpen,
+//                    User = new
+//                    {
+//                        a.User.Id,
+//                        a.User.Username
+//                    }
+//                }).ToList();
+
+//                return Ok(result);
+//            }
+//            catch (Exception ex)
+//            {
+//                Console.WriteLine($"Error in GetItems: {ex.Message}");
+//                return StatusCode(500, new { error = "Failed to load auction items." });
+//            }
+//        }
+
+//        // GET: api/auctionitems/1
+//        [HttpGet("{id}")]
+//        public async Task<ActionResult> GetItem(int id)
+//        {
+//            try
+//            {
+//                var item = await _context.AuctionItems
+//                    .Include(a => a.User)
+//                    .Include(a => a.Bids)
+//                        .ThenInclude(b => b.User)
+//                    .FirstOrDefaultAsync(a => a.Id == id);
+
+//                if (item == null) return NotFound(new { message = "Auction item not found." });
+
+//                var result = new
+//                {
+//                    item.Id,
+//                    item.Name,
+//                    item.Description,
+//                    item.StartingPrice,
+//                    item.CreatedAt,
+//                    item.ImageUrl,
+//                    item.BidStartTime,
+//                    item.BidEndTime,
+//                    item.CurrentHighestBid,
+//                    IsBiddingOpen = item.IsBiddingOpen,
+//                    User = new
+//                    {
+//                        item.User.Id,
+//                        item.User.Username
+//                    },
+//                    Bids = item.Bids.Select(b => new
+//                    {
+//                        b.Id,
+//                        b.Amount,
+//                        b.BidTime,
+//                        User = new
+//                        {
+//                            b.User.Id,
+//                            b.User.Username
+//                        }
+//                    }).ToList()
+//                };
+
+//                return Ok(result);
+//            }
+//            catch (Exception ex)
+//            {
+//                Console.WriteLine($"Error in GetItem: {ex.Message}");
+//                return StatusCode(500, new { error = "Failed to load auction item." });
+//            }
+//        }
+
+//        // POST: api/auctionitems
+//        [HttpPost]
+//        public async Task<ActionResult> CreateItem([FromForm] AuctionItemDto model)
+//        {
+//            if (string.IsNullOrEmpty(model.Name) || model.StartingPrice <= 0)
+//            {
+//                return BadRequest(new { error = "Name and StartingPrice are required." });
+//            }
+
+//            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+//            if (userIdClaim == null || !int.TryParse(userIdClaim, out int userId))
+//                return Unauthorized();
+
+//            string imageUrl = null;
+
+//            if (model.ImageFile != null && model.ImageFile.Length > 0)
+//            {
+//                var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images");
+//                if (!Directory.Exists(uploadsFolder))
+//                    Directory.CreateDirectory(uploadsFolder);
+
+//                var fileName = Guid.NewGuid() + Path.GetExtension(model.ImageFile.FileName);
+//                var filePath = Path.Combine(uploadsFolder, fileName);
+
+//                using (var stream = new FileStream(filePath, FileMode.Create))
+//                {
+//                    await model.ImageFile.CopyToAsync(stream);
+//                }
+
+//                imageUrl = $"/images/{fileName}";
+//            }
+
+//            var item = new AuctionItem
+//            {
+//                Name = model.Name,
+//                Description = model.Description,
+//                StartingPrice = model.StartingPrice,
+//                UserId = userId,
+//                ImageUrl = imageUrl,
+//                CreatedAt = DateTime.UtcNow
+//            };
+
+//            _context.AuctionItems.Add(item);
+//            await _context.SaveChangesAsync();
+
+//            return CreatedAtAction(nameof(GetItem), new { id = item.Id }, new
+//            {
+//                item.Id,
+//                item.Name,
+//                item.Description,
+//                item.StartingPrice,
+//                item.CreatedAt,
+//                item.ImageUrl,
+//                item.BidStartTime,
+//                item.BidEndTime,
+//                UserId = item.UserId,
+//                User = new { item.User?.Id, item.User?.Username }
+//            });
+//        }
+
+//        [HttpPut("start-bid/{id}")]
+//        [Authorize(Roles = "Admin")]
+//        public async Task<IActionResult> StartBid(int id, [FromBody] StartBidModel model)
+//        {
+//            var item = await _context.AuctionItems.FindAsync(id);
+//            if (item == null) return NotFound("Auction item not found.");
+
+//            // ✅ Validate: End time must be after start time
+//            if (model.EndTime <= model.StartTime)
+//                return BadRequest("End time must be after start time.");
+
+//            // ✅ Set admin-defined times
+//            item.BidStartTime = model.StartTime;
+//            item.BidEndTime = model.EndTime;
+
+//            await _context.SaveChangesAsync();
+
+//            // 🔔 Notify all clients via SignalR
+//            await _hubContext.Clients.All.SendAsync("ReceiveBid",
+//                $"🎉 Bidding started for '{item.Name}'! Ends at {item.BidEndTime:HH:mm:ss}");
+
+//            return Ok(new
+//            {
+//                message = "Bidding started successfully.",
+//                item.BidStartTime,
+//                item.BidEndTime,
+//                item.IsBiddingOpen
+//            });
+//        }
+
+//        // DTO for request
+
+
+//        // DELETE: api/auctionitems/5
+//        [HttpDelete("{id}")]
+//        [Authorize(Roles = "Admin")]
+//        public async Task<IActionResult> DeleteItem(int id)
+//        {
+//            var item = await _context.AuctionItems.FindAsync(id);
+//            if (item == null) return NotFound();
+
+//            if (!string.IsNullOrEmpty(item.ImageUrl))
+//            {
+//                var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", item.ImageUrl.TrimStart('/'));
+//                if (System.IO.File.Exists(imagePath))
+//                {
+//                    try
+//                    {
+//                        System.IO.File.Delete(imagePath);
+//                    }
+//                    catch (Exception ex)
+//                    {
+//                        Console.WriteLine($"Failed to delete image: {ex.Message}");
+//                    }
+//                }
+//            }
+
+//            _context.AuctionItems.Remove(item);
+//            await _context.SaveChangesAsync();
+
+//            return NoContent();
+//        }
+
+//        // DTOs
+//        public class AuctionItemDto
+//        {
+//            public string Name { get; set; } = string.Empty;
+//            public string Description { get; set; } = string.Empty;
+//            public decimal StartingPrice { get; set; }
+//            public IFormFile? ImageFile { get; set; }
+//        }
+
+//        public class StartBidModel
+//        {
+//            public DateTime StartTime { get; set; }
+//            public DateTime EndTime { get; set; }
+//        }
+
+
+
+
+//    }
+//}
+
+
+
+using AuctionApi.Data;
+using AuctionApi.Hubs;
+using AuctionApi.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
+using System.IO;
+
+namespace AuctionApi.Controllers
+{
+    [ApiController]
+    [Route("api/[controller]")]
+    [Authorize(Roles = "User,Admin")]
+    public class AuctionItemsController : ControllerBase
+    {
+        private readonly AppDbContext _context;
+        private readonly IHubContext<NotificationHub> _hubContext;
+
+        public AuctionItemsController(AppDbContext context, IHubContext<NotificationHub> hubContext)
+        {
+            _context = context;
+            _hubContext = hubContext;
+        }
+
+        // GET: api/auctionitems
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<object>>> GetItems()
+        {
+            try
+            {
+                var items = await _context.AuctionItems
+                    .Include(a => a.User)
+                    .Include(a => a.Bids)
+                        .ThenInclude(b => b.User)
+                    .ToListAsync();
+
+                var result = items.Select(a => new
+                {
+                    a.Id,
+                    a.Name,
+                    a.Description,
+                    a.StartingPrice,
+                    a.CreatedAt,
+                    a.ImageUrl,
+                    a.BidStartTime,
+                    a.BidEndTime,
+                    a.CurrentHighestBid,
+                    IsBiddingOpen = a.IsBiddingOpen,
+                    User = new
+                    {
+                        a.User.Id,
+                        a.User.Username
+                    }
+                }).ToList();
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error in GetItems: {ex.Message}");
+                return StatusCode(500, new { error = "Failed to load auction items." });
+            }
+        }
+
+        // GET: api/auctionitems/1
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetItem(int id)
+        {
+            try
+            {
+                var item = await _context.AuctionItems
+                    .Include(a => a.User)
+                    .Include(a => a.Bids)
+                        .ThenInclude(b => b.User)
+                    .FirstOrDefaultAsync(a => a.Id == id);
+
+                if (item == null) return NotFound(new { message = "Auction item not found." });
+
+                var result = new
+                {
+                    item.Id,
+                    item.Name,
+                    item.Description,
+                    item.StartingPrice,
+                    item.CreatedAt,
+                    item.ImageUrl,
+                    item.BidStartTime,
+                    item.BidEndTime,
+                    item.CurrentHighestBid,
+                    IsBiddingOpen = item.IsBiddingOpen,
+                    User = new
+                    {
+                        item.User.Id,
+                        item.User.Username
+                    },
+                    Bids = item.Bids.Select(b => new
+                    {
+                        b.Id,
+                        b.Amount,
+                        b.BidTime,
+                        User = new
+                        {
+                            b.User.Id,
+                            b.User.Username
+                        }
+                    }).ToList()
+                };
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error in GetItem: {ex.Message}");
+                return StatusCode(500, new { error = "Failed to load auction item." });
+            }
+        }
+
+        // POST: api/auctionitems
+        [HttpPost]
+        public async Task<ActionResult> CreateItem([FromForm] AuctionItemDto model)
+        {
+            if (string.IsNullOrEmpty(model.Name) || model.StartingPrice <= 0)
+            {
+                return BadRequest(new { error = "Name and StartingPrice are required." });
+            }
+
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (userIdClaim == null || !int.TryParse(userIdClaim, out int userId))
+                return Unauthorized();
+
+            string imageUrl = null;
+
+            if (model.ImageFile != null && model.ImageFile.Length > 0)
+            {
+                var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images");
+                if (!Directory.Exists(uploadsFolder))
+                    Directory.CreateDirectory(uploadsFolder);
+
+                var fileName = Guid.NewGuid() + Path.GetExtension(model.ImageFile.FileName);
+                var filePath = Path.Combine(uploadsFolder, fileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await model.ImageFile.CopyToAsync(stream);
+                }
+
+                imageUrl = $"/images/{fileName}";
+            }
+
+            var item = new AuctionItem
+            {
+                Name = model.Name,
+                Description = model.Description,
+                StartingPrice = model.StartingPrice,
+                UserId = userId,
+                ImageUrl = imageUrl,
+                CreatedAt = DateTime.UtcNow
+            };
+
+            _context.AuctionItems.Add(item);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetItem), new { id = item.Id }, new
+            {
+                item.Id,
+                item.Name,
+                item.Description,
+                item.StartingPrice,
+                item.CreatedAt,
+                item.ImageUrl,
+                item.BidStartTime,
+                item.BidEndTime,
+                UserId = item.UserId,
+                User = new { item.User?.Id, item.User?.Username }
+            });
+        }
+
+        // PUT: api/auctionitems/start-bid/5
+        [HttpPut("start-bid/{id}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> StartBid(int id, [FromBody] StartBidModel model)
+        {
+            var item = await _context.AuctionItems.FindAsync(id);
+            if (item == null) return NotFound("Auction item not found.");
+
+            if (model.EndTime <= model.StartTime)
+                return BadRequest("End time must be after start time.");
+
+            item.BidStartTime = model.StartTime;
+            item.BidEndTime = model.EndTime;
+
+            await _context.SaveChangesAsync();
+
+            await _hubContext.Clients.All.SendAsync("ReceiveBid",
+                $"🎉 Bidding started for '{item.Name}'! Ends at {item.BidEndTime:HH:mm:ss}");
+
+            return Ok(new
+            {
+                message = "Bidding started successfully.",
+                item.BidStartTime,
+                item.BidEndTime,
+                IsBiddingOpen = item.IsBiddingOpen
+            });
+        }
+
+        // DELETE: api/auctionitems/5
+        [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> DeleteItem(int id)
+        {
+            var item = await _context.AuctionItems.FindAsync(id);
+            if (item == null) return NotFound();
+
+            if (!string.IsNullOrEmpty(item.ImageUrl))
+            {
+                var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", item.ImageUrl.TrimStart('/'));
+                if (System.IO.File.Exists(imagePath))
+                {
+                    try
+                    {
+                        System.IO.File.Delete(imagePath);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Failed to delete image: {ex.Message}");
+                    }
+                }
+            }
+
+            _context.AuctionItems.Remove(item);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        // DTOs
+        public class AuctionItemDto
+        {
+            public string Name { get; set; } = string.Empty;
+            public string Description { get; set; } = string.Empty;
+            public decimal StartingPrice { get; set; }
+            public IFormFile? ImageFile { get; set; }
+        }
+
+        public class StartBidModel
+        {
+            public DateTime StartTime { get; set; }
+            public DateTime EndTime { get; set; }
+        }
+    }
+}
