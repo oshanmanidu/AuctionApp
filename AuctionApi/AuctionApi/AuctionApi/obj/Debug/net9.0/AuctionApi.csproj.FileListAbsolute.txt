@@ -166,3 +166,7 @@ D:\Project\University\AuctionApi\AuctionApi\AuctionApi\obj\Debug\net9.0\AuctionA
 D:\Project\University\AuctionApi\AuctionApi\AuctionApi\obj\Debug\net9.0\ref\AuctionApi.dll
 D:\Project\University\AuctionApi\AuctionApi\AuctionApi\bin\Debug\net9.0\AuctionApi.staticwebassets.runtime.json
 D:\Project\University\AuctionApi\AuctionApi\AuctionApi\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
+D:\Project\University\AuctionApi\AuctionApi\AuctionApi\obj\Debug\net9.0\AuctionApi.sourcelink.json
+D:\Project\University\AuctionApi\AuctionApi\AuctionApi\bin\Debug\net9.0\BouncyCastle.Cryptography.dll
+D:\Project\University\AuctionApi\AuctionApi\AuctionApi\bin\Debug\net9.0\MailKit.dll
+D:\Project\University\AuctionApi\AuctionApi\AuctionApi\bin\Debug\net9.0\MimeKit.dll

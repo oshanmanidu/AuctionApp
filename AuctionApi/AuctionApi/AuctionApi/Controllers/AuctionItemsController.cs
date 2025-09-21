@@ -266,12 +266,13 @@
 using AuctionApi.Data;
 using AuctionApi.Hubs;
 using AuctionApi.Models;
+using AuctionApi.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
 using System.IO;
+using System.Security.Claims;
 
 namespace AuctionApi.Controllers
 {
@@ -290,6 +291,45 @@ namespace AuctionApi.Controllers
         }
 
         // GET: api/auctionitems
+        //[HttpGet]
+        //public async Task<ActionResult<IEnumerable<object>>> GetItems()
+        //{
+        //    try
+        //    {
+        //        var items = await _context.AuctionItems
+        //            .Include(a => a.User)
+        //            .Include(a => a.Bids)
+        //                .ThenInclude(b => b.User)
+        //            .ToListAsync();
+
+        //        var result = items.Select(a => new
+        //        {
+        //            a.Id,
+        //            a.Name,
+        //            a.Description,
+        //            a.StartingPrice,
+        //            a.CreatedAt,
+        //            a.ImageUrl,
+        //            a.BidStartTime,
+        //            a.BidEndTime,
+        //            a.CurrentHighestBid,
+        //            IsBiddingOpen = a.IsBiddingOpen,
+        //            User = new
+        //            {
+        //                a.User.Id,
+        //                a.User.Username
+        //            }
+        //        }).ToList();
+
+        //        return Ok(result);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine($"Error in GetItems: {ex.Message}");
+        //        return StatusCode(500, new { error = "Failed to load auction items." });
+        //    }
+        //}
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<object>>> GetItems()
         {
@@ -297,8 +337,8 @@ namespace AuctionApi.Controllers
             {
                 var items = await _context.AuctionItems
                     .Include(a => a.User)
-                    .Include(a => a.Bids)
-                        .ThenInclude(b => b.User)
+                    .Include(a => a.Bids) // ✅ Critical: Load bids
+                    .ThenInclude(b => b.User)
                     .ToListAsync();
 
                 var result = items.Select(a => new
@@ -311,12 +351,12 @@ namespace AuctionApi.Controllers
                     a.ImageUrl,
                     a.BidStartTime,
                     a.BidEndTime,
-                    a.CurrentHighestBid,
+                    a.CurrentHighestBid, // ✅ Now accurate
                     IsBiddingOpen = a.IsBiddingOpen,
                     User = new
                     {
                         a.User.Id,
-                        a.User.Username
+                        a.User.Email
                     }
                 }).ToList();
 
@@ -330,6 +370,60 @@ namespace AuctionApi.Controllers
         }
 
         // GET: api/auctionitems/1
+        //[HttpGet("{id}")]
+        //public async Task<ActionResult> GetItem(int id)
+        //{
+        //    try
+        //    {
+        //        var item = await _context.AuctionItems
+        //            .Include(a => a.User)
+        //            .Include(a => a.Bids)
+        //                .ThenInclude(b => b.User)
+        //            .FirstOrDefaultAsync(a => a.Id == id);
+
+        //        if (item == null) return NotFound(new { message = "Auction item not found." });
+
+        //        var result = new
+        //        {
+        //            item.Id,
+        //            item.Name,
+        //            item.Description,
+        //            item.StartingPrice,
+        //            item.CreatedAt,
+        //            item.ImageUrl,
+        //            item.BidStartTime,
+        //            item.BidEndTime,
+        //            item.CurrentHighestBid,
+        //            IsBiddingOpen = item.IsBiddingOpen,
+        //            User = new
+        //            {
+        //                item.User.Id,
+        //                item.User.Username
+        //            },
+        //            Bids = item.Bids.Select(b => new
+        //            {
+        //                b.Id,
+        //                b.Amount,
+        //                b.BidTime,
+        //                User = new
+        //                {
+        //                    b.User.Id,
+        //                    b.User.Username
+        //                }
+        //            }).ToList()
+        //        };
+
+        //        return Ok(result);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine($"Error in GetItem: {ex.Message}");
+        //        return StatusCode(500, new { error = "Failed to load auction item." });
+        //    }
+        //}
+
+        // POST: api/auctionitems
+
         [HttpGet("{id}")]
         public async Task<ActionResult> GetItem(int id)
         {
@@ -358,7 +452,7 @@ namespace AuctionApi.Controllers
                     User = new
                     {
                         item.User.Id,
-                        item.User.Username
+                        item.User.Email
                     },
                     Bids = item.Bids.Select(b => new
                     {
@@ -368,7 +462,7 @@ namespace AuctionApi.Controllers
                         User = new
                         {
                             b.User.Id,
-                            b.User.Username
+                            b.User.Email
                         }
                     }).ToList()
                 };
@@ -382,7 +476,7 @@ namespace AuctionApi.Controllers
             }
         }
 
-        // POST: api/auctionitems
+
         [HttpPost]
         public async Task<ActionResult> CreateItem([FromForm] AuctionItemDto model)
         {
@@ -438,7 +532,7 @@ namespace AuctionApi.Controllers
                 item.BidStartTime,
                 item.BidEndTime,
                 UserId = item.UserId,
-                User = new { item.User?.Id, item.User?.Username }
+                User = new { item.User?.Id, item.User?.Email }
             });
         }
 
@@ -500,6 +594,82 @@ namespace AuctionApi.Controllers
             return NoContent();
         }
 
+        [HttpPut("end-auction/{id}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> EndAuction(int id, [FromServices] EmailService emailService)
+        {
+            var item = await _context.AuctionItems
+                .Include(a => a.Bids)
+                    .ThenInclude(b => b.User)
+                .FirstOrDefaultAsync(a => a.Id == id);
+
+            if (item == null) return NotFound("Auction item not found.");
+
+            if (DateTime.UtcNow < (item.BidStartTime ?? DateTime.MinValue))
+                return BadRequest("Auction hasn't started yet.");
+
+            if (!item.IsBiddingOpen && item.BidEndTime < DateTime.UtcNow)
+                return BadRequest("Auction already ended.");
+
+            // 🔍 Find winner (highest bidder)
+            var highestBid = item.Bids
+                .OrderByDescending(b => b.Amount)
+                .FirstOrDefault();
+
+            if (highestBid == null)
+                return BadRequest("No bids were placed.");
+
+            var winner = await _context.Users.FindAsync(highestBid.UserId);
+            var allBidders = item.Bids.Select(b => b.User).Distinct().ToList();
+
+            // 📧 Send emails
+            foreach (var user in allBidders)
+            {
+                try
+                {
+                    if (user.Id == winner.Id)
+                    {
+                        await emailService.SendEmailAsync(
+                            user.Email,
+                            $"🎉 Congratulations! You won '{item.Name}'",
+                            $@"
+                    <h2>Congratulations, {user.Email}!</h2>
+                    <p>You have won the auction for <strong>{item.Name}</strong> with a bid of <strong>${highestBid.Amount:F2}</strong>.</p>
+                    <p>Contact the admin to complete the payment.</p>
+                    <p><em>Thank you for using BiddingBoom!</em></p>"
+                        );
+                    }
+                    else
+                    {
+                        await emailService.SendEmailAsync(
+                            user.Email,
+                            $"🔚 Auction for '{item.Name}' has ended",
+                            $@"
+                    <h2>Hi there,</h2>
+                    <p>The auction for <strong>{item.Name}</strong> has ended.</p>
+                    <p>The winning bid was <strong>${highestBid.Amount:F2}</strong>.</p>
+                    <p>Better luck next time!</p>
+                    <p><em>Thanks for participating in BiddingBoom!</em></p>"
+                        );
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Log failed email (optional)
+                    Console.WriteLine($"Failed to send email to {user.Email}: {ex.Message}");
+                }
+            }
+
+            // Optional: Mark as closed in DB
+            // item.BidEndTime = DateTime.UtcNow;
+            // await _context.SaveChangesAsync();
+
+            return Ok(new
+            {
+                message = "Auction ended. Emails sent to all bidders.",
+                winner = new { winner.Email, Amount = highestBid.Amount }
+            });
+        }
         // DTOs
         public class AuctionItemDto
         {

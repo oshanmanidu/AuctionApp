@@ -5,9 +5,9 @@ import api from '../services/api';
 
 export default function Register() {
     const [form, setForm] = useState({
-        username: '',
+        email: '',
         password: '',
-        role: 'User' // default
+        role: 'User'
     });
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
@@ -22,12 +22,10 @@ export default function Register() {
 
         try {
             await api.post('/auth/register', form);
-            setSuccess('Registration successful! Redirecting to login...');
-            setTimeout(() => {
-                navigate('/');
-            }, 2000);
+            setSuccess('Registration successful!');
+            setTimeout(() => navigate('/'), 2000);
         } catch (err) {
-            setError(err.response?.data || 'Registration failed. Please try again.');
+            setError('Registration failed');
         } finally {
             setIsLoading(false);
         }
@@ -63,18 +61,18 @@ export default function Register() {
                 ) : (
                     <form onSubmit={handleSubmit} className="auth-form">
                         <div className="form-group">
-                            <label className="form-label" htmlFor="username">
-                                Username
+                            <label className="form-label" htmlFor="email">
+                                Email
                             </label>
                             <div className="input-wrapper">
-                                <span className="input-icon">👤</span>
+                                <span className="input-icon">📧</span>
                                 <input
-                                    id="username"
-                                    type="text"
+                                    id="email"
+                                    type="email"
                                     className="form-input"
-                                    placeholder="Choose a username"
-                                    value={form.username}
-                                    onChange={(e) => setForm({ ...form, username: e.target.value })}
+                                    placeholder="Enter your email"
+                                    value={form.email}
+                                    onChange={(e) => setForm({ ...form, email: e.target.value })}
                                     required
                                     disabled={isLoading}
                                 />
@@ -113,8 +111,8 @@ export default function Register() {
                                     onChange={(e) => setForm({ ...form, role: e.target.value })}
                                     disabled={isLoading}
                                 >
-                                    <option value="User">User - Bid on auctions</option>
-                                    <option value="Admin">Admin - Manage platform</option>
+                                    <option value="User">User</option>
+                                    <option value="Admin">Admin</option>
                                 </select>
                             </div>
                         </div>

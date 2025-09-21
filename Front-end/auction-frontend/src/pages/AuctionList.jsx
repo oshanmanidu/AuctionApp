@@ -309,22 +309,9 @@ export default function AuctionList() {
                                     <p>🚫 Bidding not started</p>
                                 )}
 
-                                {item.bids && item.bids.length > 0 ? (
-                                    <div className="auction-highest-bid">
-                                        <span className="highest-bid-label">Highest Bid:</span>
-                                        <span className="highest-bid-value">
-                                            ${item.currentHighestBid || Math.max(...item.bids.map(b => b.amount))}
-                                        </span>
-                                        {/* Show real-time indicator if bid was just updated */}
-                                        {item.currentHighestBid && (
-                                            <span className="realtime-indicator">🔴 LIVE</span>
-                                        )}
-                                    </div>
-                                ) : (
-                                    <div className="auction-no-bids">
-                                        <span className="no-bids-text">No bids yet</span>
-                                    </div>
-                                )}
+                                <p>
+                                    <strong>Highest Bid:</strong> ${item.currentHighestBid}
+                                </p>
 
                                 <div className="auction-bid-section">
                                     <div className="bid-input-group">

@@ -22,7 +22,7 @@ namespace AuctionApi.Controllers
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
             var users = await _context.Users
-                .Select(u => new { u.Id, u.Username, u.Role })
+                .Select(u => new { u.Id, u.Email, u.Role })
                 .ToListAsync();
 
             return Ok(users);

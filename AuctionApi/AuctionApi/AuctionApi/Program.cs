@@ -2,8 +2,9 @@
 
 using AuctionApi.Data;
 using AuctionApi.Hubs;
-using Microsoft.EntityFrameworkCore;
+using AuctionApi.Services;
 using Microsoft.AspNetCore.OpenApi;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -58,6 +59,9 @@ builder.Services.AddAuthentication("Bearer")
 
 // ✅ 7. Add Authorization
 builder.Services.AddAuthorization();
+
+builder.Services.AddHostedService<AuctionBackgroundService>();
+builder.Services.AddScoped<EmailService>();
 
 var app = builder.Build();
 

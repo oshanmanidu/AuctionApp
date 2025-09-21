@@ -3,13 +3,13 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Navbar() {
     const role = localStorage.getItem('role');
-    const username = localStorage.getItem('username');
+    const email = localStorage.getItem('email');
     const navigate = useNavigate();
 
     const handleLogout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('role');
-        localStorage.removeItem('username');
+        localStorage.removeItem('email');
         navigate('/');
     };
 
@@ -25,15 +25,14 @@ export default function Navbar() {
                 </div>
 
                 <div className="navbar-menu">
-                    {username ? (
+                    {email ? (
                         <div className="navbar-user">
                             <div className="user-info">
                                 <div className="user-avatar">
-                                    {username.charAt(0).toUpperCase()}
+                                    {email.charAt(0).toUpperCase()}
                                 </div>
                                 <div className="user-details">
-                                    <span className="username">{username}</span>
-                                    <span className="user-role">{role}</span>
+                                    <span>Welcome, <strong>{email}</strong> ({role})</span>
                                 </div>
                             </div>
 

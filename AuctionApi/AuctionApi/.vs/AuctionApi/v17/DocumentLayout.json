@@ -3,44 +3,40 @@
   "WorkspaceRootPath": "D:\\Project\\University\\AuctionApi\\AuctionApi\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FE3DAE6C-C548-438C-83C1-834287AD8AD5}|AuctionApi\\AuctionApi.csproj|d:\\project\\university\\auctionapi\\auctionapi\\auctionapi\\controllers\\bidscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FE3DAE6C-C548-438C-83C1-834287AD8AD5}|AuctionApi\\AuctionApi.csproj|solutionrelative:auctionapi\\controllers\\bidscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FE3DAE6C-C548-438C-83C1-834287AD8AD5}|AuctionApi\\AuctionApi.csproj|d:\\project\\university\\auctionapi\\auctionapi\\auctionapi\\controllers\\auctionitemscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FE3DAE6C-C548-438C-83C1-834287AD8AD5}|AuctionApi\\AuctionApi.csproj|solutionrelative:auctionapi\\controllers\\auctionitemscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FE3DAE6C-C548-438C-83C1-834287AD8AD5}|AuctionApi\\AuctionApi.csproj|d:\\project\\university\\auctionapi\\auctionapi\\auctionapi\\models\\bid.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FE3DAE6C-C548-438C-83C1-834287AD8AD5}|AuctionApi\\AuctionApi.csproj|solutionrelative:auctionapi\\models\\bid.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{FE3DAE6C-C548-438C-83C1-834287AD8AD5}|AuctionApi\\AuctionApi.csproj|d:\\project\\university\\auctionapi\\auctionapi\\auctionapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FE3DAE6C-C548-438C-83C1-834287AD8AD5}|AuctionApi\\AuctionApi.csproj|solutionrelative:auctionapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FE3DAE6C-C548-438C-83C1-834287AD8AD5}|AuctionApi\\AuctionApi.csproj|d:\\project\\university\\auctionapi\\auctionapi\\auctionapi\\migrations\\20250914083359_fixs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FE3DAE6C-C548-438C-83C1-834287AD8AD5}|AuctionApi\\AuctionApi.csproj|solutionrelative:auctionapi\\migrations\\20250914083359_fixs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FE3DAE6C-C548-438C-83C1-834287AD8AD5}|AuctionApi\\AuctionApi.csproj|d:\\project\\university\\auctionapi\\auctionapi\\auctionapi\\models\\auctionitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FE3DAE6C-C548-438C-83C1-834287AD8AD5}|AuctionApi\\AuctionApi.csproj|solutionrelative:auctionapi\\models\\auctionitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FE3DAE6C-C548-438C-83C1-834287AD8AD5}|AuctionApi\\AuctionApi.csproj|d:\\project\\university\\auctionapi\\auctionapi\\auctionapi\\models\\biddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FE3DAE6C-C548-438C-83C1-834287AD8AD5}|AuctionApi\\AuctionApi.csproj|solutionrelative:auctionapi\\models\\biddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\University\\AuctionApi\\AuctionApi\\AuctionApi\\Migrations\\20250914083310_fix.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:AuctionApi\\Migrations\\20250914083310_fix.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FE3DAE6C-C548-438C-83C1-834287AD8AD5}|AuctionApi\\AuctionApi.csproj|d:\\project\\university\\auctionapi\\auctionapi\\auctionapi\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{FE3DAE6C-C548-438C-83C1-834287AD8AD5}|AuctionApi\\AuctionApi.csproj|solutionrelative:auctionapi\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\University\\AuctionApi\\AuctionApi\\AuctionApi\\Migrations\\20250914083152_AddWinnerInfoToAuctionItem2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:AuctionApi\\Migrations\\20250914083152_AddWinnerInfoToAuctionItem2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FE3DAE6C-C548-438C-83C1-834287AD8AD5}|AuctionApi\\AuctionApi.csproj|d:\\project\\university\\auctionapi\\auctionapi\\auctionapi\\hubs\\notificationhub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FE3DAE6C-C548-438C-83C1-834287AD8AD5}|AuctionApi\\AuctionApi.csproj|solutionrelative:auctionapi\\hubs\\notificationhub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FE3DAE6C-C548-438C-83C1-834287AD8AD5}|AuctionApi\\AuctionApi.csproj|d:\\project\\university\\auctionapi\\auctionapi\\auctionapi\\services\\auctionbackgroundservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FE3DAE6C-C548-438C-83C1-834287AD8AD5}|AuctionApi\\AuctionApi.csproj|solutionrelative:auctionapi\\services\\auctionbackgroundservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FE3DAE6C-C548-438C-83C1-834287AD8AD5}|AuctionApi\\AuctionApi.csproj|d:\\project\\university\\auctionapi\\auctionapi\\auctionapi\\migrations\\20250823174808_addimagetoauctionitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FE3DAE6C-C548-438C-83C1-834287AD8AD5}|AuctionApi\\AuctionApi.csproj|solutionrelative:auctionapi\\migrations\\20250823174808_addimagetoauctionitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FE3DAE6C-C548-438C-83C1-834287AD8AD5}|AuctionApi\\AuctionApi.csproj|d:\\project\\university\\auctionapi\\auctionapi\\auctionapi\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FE3DAE6C-C548-438C-83C1-834287AD8AD5}|AuctionApi\\AuctionApi.csproj|solutionrelative:auctionapi\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FE3DAE6C-C548-438C-83C1-834287AD8AD5}|AuctionApi\\AuctionApi.csproj|d:\\project\\university\\auctionapi\\auctionapi\\auctionapi\\migrations\\20250827070146_addbidtiming.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FE3DAE6C-C548-438C-83C1-834287AD8AD5}|AuctionApi\\AuctionApi.csproj|solutionrelative:auctionapi\\migrations\\20250827070146_addbidtiming.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FE3DAE6C-C548-438C-83C1-834287AD8AD5}|AuctionApi\\AuctionApi.csproj|d:\\project\\university\\auctionapi\\auctionapi\\auctionapi\\models\\bid.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FE3DAE6C-C548-438C-83C1-834287AD8AD5}|AuctionApi\\AuctionApi.csproj|solutionrelative:auctionapi\\models\\bid.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FE3DAE6C-C548-438C-83C1-834287AD8AD5}|AuctionApi\\AuctionApi.csproj|d:\\project\\university\\auctionapi\\auctionapi\\auctionapi\\migrations\\20250914082926_addwinnerinfotoauctionitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FE3DAE6C-C548-438C-83C1-834287AD8AD5}|AuctionApi\\AuctionApi.csproj|solutionrelative:auctionapi\\migrations\\20250914082926_addwinnerinfotoauctionitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -62,31 +58,92 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "20250827070146_AddBidTiming.cs",
-              "DocumentMoniker": "D:\\Project\\University\\AuctionApi\\AuctionApi\\AuctionApi\\Migrations\\20250827070146_AddBidTiming.cs",
-              "RelativeDocumentMoniker": "AuctionApi\\Migrations\\20250827070146_AddBidTiming.cs",
-              "ToolTip": "D:\\Project\\University\\AuctionApi\\AuctionApi\\AuctionApi\\Migrations\\20250827070146_AddBidTiming.cs",
-              "RelativeToolTip": "AuctionApi\\Migrations\\20250827070146_AddBidTiming.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "20250914083359_fixs.cs",
+              "DocumentMoniker": "D:\\Project\\University\\AuctionApi\\AuctionApi\\AuctionApi\\Migrations\\20250914083359_fixs.cs",
+              "RelativeDocumentMoniker": "AuctionApi\\Migrations\\20250914083359_fixs.cs",
+              "ToolTip": "D:\\Project\\University\\AuctionApi\\AuctionApi\\AuctionApi\\Migrations\\20250914083359_fixs.cs",
+              "RelativeToolTip": "AuctionApi\\Migrations\\20250914083359_fixs.cs",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAmwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-27T07:01:46.685Z"
+              "WhenOpened": "2025-09-14T08:33:59.747Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "BidDto.cs",
-              "DocumentMoniker": "D:\\Project\\University\\AuctionApi\\AuctionApi\\AuctionApi\\Models\\BidDto.cs",
-              "RelativeDocumentMoniker": "AuctionApi\\Models\\BidDto.cs",
-              "ToolTip": "D:\\Project\\University\\AuctionApi\\AuctionApi\\AuctionApi\\Models\\BidDto.cs",
-              "RelativeToolTip": "AuctionApi\\Models\\BidDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAABAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "20250914083310_fix.cs",
+              "DocumentMoniker": "D:\\Project\\University\\AuctionApi\\AuctionApi\\AuctionApi\\Migrations\\20250914083310_fix.cs",
+              "RelativeDocumentMoniker": "AuctionApi\\Migrations\\20250914083310_fix.cs",
+              "ToolTip": "D:\\Project\\University\\AuctionApi\\AuctionApi\\AuctionApi\\Migrations\\20250914083310_fix.cs",
+              "RelativeToolTip": "AuctionApi\\Migrations\\20250914083310_fix.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-27T06:23:10.68Z"
+              "WhenOpened": "2025-09-14T08:33:10.754Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "20250914083152_AddWinnerInfoToAuctionItem2.cs",
+              "DocumentMoniker": "D:\\Project\\University\\AuctionApi\\AuctionApi\\AuctionApi\\Migrations\\20250914083152_AddWinnerInfoToAuctionItem2.cs",
+              "RelativeDocumentMoniker": "AuctionApi\\Migrations\\20250914083152_AddWinnerInfoToAuctionItem2.cs",
+              "ToolTip": "D:\\Project\\University\\AuctionApi\\AuctionApi\\AuctionApi\\Migrations\\20250914083152_AddWinnerInfoToAuctionItem2.cs",
+              "RelativeToolTip": "AuctionApi\\Migrations\\20250914083152_AddWinnerInfoToAuctionItem2.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAqwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-14T08:31:52.653Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "20250914082926_AddWinnerInfoToAuctionItem.cs",
+              "DocumentMoniker": "D:\\Project\\University\\AuctionApi\\AuctionApi\\AuctionApi\\Migrations\\20250914082926_AddWinnerInfoToAuctionItem.cs",
+              "RelativeDocumentMoniker": "AuctionApi\\Migrations\\20250914082926_AddWinnerInfoToAuctionItem.cs",
+              "ToolTip": "D:\\Project\\University\\AuctionApi\\AuctionApi\\AuctionApi\\Migrations\\20250914082926_AddWinnerInfoToAuctionItem.cs",
+              "RelativeToolTip": "AuctionApi\\Migrations\\20250914082926_AddWinnerInfoToAuctionItem.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-14T08:29:26.855Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Project\\University\\AuctionApi\\AuctionApi\\AuctionApi\\Program.cs",
+              "RelativeDocumentMoniker": "AuctionApi\\Program.cs",
+              "ToolTip": "D:\\Project\\University\\AuctionApi\\AuctionApi\\AuctionApi\\Program.cs",
+              "RelativeToolTip": "AuctionApi\\Program.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-14T07:20:44.954Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "User.cs",
+              "DocumentMoniker": "D:\\Project\\University\\AuctionApi\\AuctionApi\\AuctionApi\\Models\\User.cs",
+              "RelativeDocumentMoniker": "AuctionApi\\Models\\User.cs",
+              "ToolTip": "D:\\Project\\University\\AuctionApi\\AuctionApi\\AuctionApi\\Models\\User.cs",
+              "RelativeToolTip": "AuctionApi\\Models\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-14T07:13:06.818Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "AuctionItem.cs",
+              "DocumentMoniker": "D:\\Project\\University\\AuctionApi\\AuctionApi\\AuctionApi\\Models\\AuctionItem.cs",
+              "RelativeDocumentMoniker": "AuctionApi\\Models\\AuctionItem.cs",
+              "ToolTip": "D:\\Project\\University\\AuctionApi\\AuctionApi\\AuctionApi\\Models\\AuctionItem.cs",
+              "RelativeToolTip": "AuctionApi\\Models\\AuctionItem.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAywBUAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-14T07:13:05.044Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "Bid.cs",
               "DocumentMoniker": "D:\\Project\\University\\AuctionApi\\AuctionApi\\AuctionApi\\Models\\Bid.cs",
               "RelativeDocumentMoniker": "AuctionApi\\Models\\Bid.cs",
@@ -94,92 +151,19 @@
               "RelativeToolTip": "AuctionApi\\Models\\Bid.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-27T06:03:42.721Z"
+              "WhenOpened": "2025-09-14T07:12:55.776Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "launchSettings.json",
-              "DocumentMoniker": "D:\\Project\\University\\AuctionApi\\AuctionApi\\AuctionApi\\Properties\\launchSettings.json",
-              "RelativeDocumentMoniker": "AuctionApi\\Properties\\launchSettings.json",
-              "ToolTip": "D:\\Project\\University\\AuctionApi\\AuctionApi\\AuctionApi\\Properties\\launchSettings.json",
-              "RelativeToolTip": "AuctionApi\\Properties\\launchSettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-08-24T07:30:58.046Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "BidsController.cs",
-              "DocumentMoniker": "D:\\Project\\University\\AuctionApi\\AuctionApi\\AuctionApi\\Controllers\\BidsController.cs",
-              "RelativeDocumentMoniker": "AuctionApi\\Controllers\\BidsController.cs",
-              "ToolTip": "D:\\Project\\University\\AuctionApi\\AuctionApi\\AuctionApi\\Controllers\\BidsController.cs",
-              "RelativeToolTip": "AuctionApi\\Controllers\\BidsController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACcBAAABAAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "AuctionBackgroundService.cs",
+              "DocumentMoniker": "D:\\Project\\University\\AuctionApi\\AuctionApi\\AuctionApi\\Services\\AuctionBackgroundService.cs",
+              "RelativeDocumentMoniker": "AuctionApi\\Services\\AuctionBackgroundService.cs",
+              "ToolTip": "D:\\Project\\University\\AuctionApi\\AuctionApi\\AuctionApi\\Services\\AuctionBackgroundService.cs",
+              "RelativeToolTip": "AuctionApi\\Services\\AuctionBackgroundService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAH0AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-23T17:58:46.412Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\Project\\University\\AuctionApi\\AuctionApi\\AuctionApi\\Program.cs",
-              "RelativeDocumentMoniker": "AuctionApi\\Program.cs",
-              "ToolTip": "D:\\Project\\University\\AuctionApi\\AuctionApi\\AuctionApi\\Program.cs",
-              "RelativeToolTip": "AuctionApi\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-23T17:53:55.595Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "NotificationHub.cs",
-              "DocumentMoniker": "D:\\Project\\University\\AuctionApi\\AuctionApi\\AuctionApi\\Hubs\\NotificationHub.cs",
-              "RelativeDocumentMoniker": "AuctionApi\\Hubs\\NotificationHub.cs",
-              "ToolTip": "D:\\Project\\University\\AuctionApi\\AuctionApi\\AuctionApi\\Hubs\\NotificationHub.cs",
-              "RelativeToolTip": "AuctionApi\\Hubs\\NotificationHub.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-23T17:57:00.941Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "AuctionItemsController.cs",
-              "DocumentMoniker": "D:\\Project\\University\\AuctionApi\\AuctionApi\\AuctionApi\\Controllers\\AuctionItemsController.cs",
-              "RelativeDocumentMoniker": "AuctionApi\\Controllers\\AuctionItemsController.cs",
-              "ToolTip": "D:\\Project\\University\\AuctionApi\\AuctionApi\\AuctionApi\\Controllers\\AuctionItemsController.cs",
-              "RelativeToolTip": "AuctionApi\\Controllers\\AuctionItemsController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUCAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-23T17:50:22.279Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "20250823174808_AddImageToAuctionItem.cs",
-              "DocumentMoniker": "D:\\Project\\University\\AuctionApi\\AuctionApi\\AuctionApi\\Migrations\\20250823174808_AddImageToAuctionItem.cs",
-              "RelativeDocumentMoniker": "AuctionApi\\Migrations\\20250823174808_AddImageToAuctionItem.cs",
-              "ToolTip": "D:\\Project\\University\\AuctionApi\\AuctionApi\\AuctionApi\\Migrations\\20250823174808_AddImageToAuctionItem.cs",
-              "RelativeToolTip": "AuctionApi\\Migrations\\20250823174808_AddImageToAuctionItem.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-23T17:48:08.291Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "AuctionItem.cs",
-              "DocumentMoniker": "D:\\Project\\University\\AuctionApi\\AuctionApi\\AuctionApi\\Models\\AuctionItem.cs",
-              "RelativeDocumentMoniker": "AuctionApi\\Models\\AuctionItem.cs",
-              "ToolTip": "D:\\Project\\University\\AuctionApi\\AuctionApi\\AuctionApi\\Models\\AuctionItem.cs",
-              "RelativeToolTip": "AuctionApi\\Models\\AuctionItem.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAwCQAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-23T17:46:50.718Z"
+              "WhenOpened": "2025-09-14T05:27:17.707Z"
             }
           ]
         }

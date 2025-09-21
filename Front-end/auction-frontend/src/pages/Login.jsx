@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import api from '../services/api';
 
 export default function Login() {
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -15,18 +15,12 @@ export default function Login() {
         setError('');
         
         try {
-            const res = await api.post('/auth/login', { username, password });
-            const { token, role } = res.data;
+            const res = await api.post('/auth/login', { email, password });
+            localStorage.setItem('token', res.data.token);
+            localStorage.setItem('role', res.data.role);
+            localStorage.setItem('email', res.data.email); // ← Store email
 
-            localStorage.setItem('token', token);
-            localStorage.setItem('role', role);
-            localStorage.setItem('username', username);
-
-            if (role === 'Admin') {
-                navigate('/admin');
-            } else {
-                navigate('/auctions');
-            }
+            navigate(res.data.role === 'Admin' ? '/admin' : '/auctions');
         } catch (err) {
             setError('Invalid credentials. Please try again.');
         } finally {
@@ -58,18 +52,18 @@ export default function Login() {
 
                 <form onSubmit={handleSubmit} className="auth-form">
                     <div className="form-group">
-                        <label className="form-label" htmlFor="username">
-                            Username
+                        <label className="form-label" htmlFor="email">
+                            Email
                         </label>
                         <div className="input-wrapper">
-                            <span className="input-icon">👤</span>
+                            <span className="input-icon">📧</span>
                             <input
-                                id="username"
-                                type="text"
+                                id="email"
+                                type="email"
                                 className="form-input"
-                                placeholder="Enter your username"
-                                value={username}
-                                onChange={(e) => setUsername(e.target.value)}
+                                placeholder="Enter your email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                                 required
                                 disabled={isLoading}
                             />

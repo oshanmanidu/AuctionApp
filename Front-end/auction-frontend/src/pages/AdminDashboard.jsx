@@ -136,7 +136,7 @@ export default function AdminDashboard() {
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Username</th>
+                                        <th>Email</th>
                                         <th>Role</th>
                                         <th>Status</th>
                                         <th>Actions</th>
@@ -146,12 +146,12 @@ export default function AdminDashboard() {
                                     {users.map(user => (
                                         <tr key={user.id} className="user-row">
                                             <td className="user-id">#{user.id}</td>
-                                            <td className="user-username">
+                                            <td className="user-email">
                                                 <div className="user-info">
                                                     <div className="user-avatar-small">
-                                                        {user.username.charAt(0).toUpperCase()}
+                                                        {user.email.charAt(0).toUpperCase()}
                                                     </div>
-                                                    <span>{user.username}</span>
+                                                    <span>{user.email}</span>
                                                 </div>
                                             </td>
                                             <td>
