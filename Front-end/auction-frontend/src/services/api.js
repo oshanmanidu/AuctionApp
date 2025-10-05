@@ -21,7 +21,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'https://localhost:7252/api', // Proxied to https://localhost:7148/api
+    baseURL: 'http://localhost:5002/api', // Updated to match backend URL
     headers: {
         'Content-Type': 'application/json',
     },
