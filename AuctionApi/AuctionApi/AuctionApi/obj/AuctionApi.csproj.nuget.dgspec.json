@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Project\\University\\AuctionApi\\AuctionApi\\AuctionApi\\AuctionApi.csproj": {}
+    "C:\\Users\\Administrator\\Documents\\AuctionApp\\AuctionApi\\AuctionApi\\AuctionApi\\AuctionApi.csproj": {}
   },
   "projects": {
-    "D:\\Project\\University\\AuctionApi\\AuctionApi\\AuctionApi\\AuctionApi.csproj": {
+    "C:\\Users\\Administrator\\Documents\\AuctionApp\\AuctionApi\\AuctionApi\\AuctionApi\\AuctionApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Project\\University\\AuctionApi\\AuctionApi\\AuctionApi\\AuctionApi.csproj",
+        "projectUniqueName": "C:\\Users\\Administrator\\Documents\\AuctionApp\\AuctionApi\\AuctionApi\\AuctionApi\\AuctionApi.csproj",
         "projectName": "AuctionApi",
-        "projectPath": "D:\\Project\\University\\AuctionApi\\AuctionApi\\AuctionApi\\AuctionApi.csproj",
-        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-        "outputPath": "D:\\Project\\University\\AuctionApi\\AuctionApi\\AuctionApi\\obj\\",
+        "projectPath": "C:\\Users\\Administrator\\Documents\\AuctionApp\\AuctionApi\\AuctionApi\\AuctionApi\\AuctionApi.csproj",
+        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Administrator\\Documents\\AuctionApp\\AuctionApi\\AuctionApi\\AuctionApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Users\\Administrator\\AppData\\Local\\Programs\\UiPath\\Studio\\Packages": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -96,7 +97,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
