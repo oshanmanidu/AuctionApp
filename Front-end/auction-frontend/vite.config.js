@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://localhost:7148', // Your ASP.NET API URL
+        target: 'https://localhost:7252', // Updated to match backend HTTPS URL
         changeOrigin: true,
         secure: false, // Accept self-signed SSL (like dev cert)
         rewrite: (path) => path.replace(/^\/api/, '/api'),

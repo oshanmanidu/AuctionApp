@@ -25,7 +25,8 @@ export default function Register() {
             setSuccess('Registration successful!');
             setTimeout(() => navigate('/'), 2000);
         } catch (err) {
-            setError('Registration failed');
+            const errorMessage = err.response?.data || err.message || 'Registration failed';
+            setError(errorMessage);
         } finally {
             setIsLoading(false);
         }
