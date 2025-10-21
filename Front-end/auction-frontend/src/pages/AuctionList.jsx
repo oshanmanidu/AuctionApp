@@ -309,40 +309,55 @@ export default function AuctionList() {
                                     <p>🚫 Bidding not started</p>
                                 )}
 
-                                <p>
-                                    <strong>Highest Bid:</strong> ${item.currentHighestBid}
-                                </p>
-
-                                <div className="auction-bid-section">
-                                    <div className="bid-input-group">
-                                        <span className="bid-currency">$</span>
-                                        <input
-                                            type="number"
-                                            step="0.01"
-                                            min={item.startingPrice}
-                                            placeholder="Enter bid amount"
-                                            value={bidAmounts[item.id] || ''}
-                                            onChange={(e) => handleBidChange(item.id, e.target.value)}
-                                            className="bid-input"
-                                            disabled={biddingItem === item.id || !canBid}
-                                        />
+                                {item.isClosed ? (
+                                    <div style={{ 
+                                        marginTop: '1rem', 
+                                        padding: '0.75rem', 
+                                        backgroundColor: '#d4edda', 
+                                        color: '#155724', 
+                                        borderRadius: '6px', 
+                                        fontWeight: 'bold', 
+                                        fontSize: '1.1em' 
+                                    }}>
+                                        🏆 Winner: <span style={{ color: '#004085' }}>{item.winnerEmail}</span><br />
+                                        💰 Winning Bid: <span style={{ color: '#c38b00' }}>${item.winningBidAmount?.toFixed(2)}</span>
                                     </div>
-                                    <button
-                                        onClick={() => handlePlaceBid(item.id)}
-                                        className="btn btn-primary bid-button"
-                                        disabled={biddingItem === item.id || !bidAmounts[item.id] || !canBid}
-                                    >
-                                        {biddingItem === item.id ? (
-                                            <>
-                                                <span className="loading"></span>
-                                                Placing Bid...
-                                            </>
-                                        ) : (
-                                            'Place Bid'
-                                        )}
-                                    </button>
-                                    
-                                </div>
+                                ) : (
+                                    <p>Bidding Open! Current Highest: ${item.currentHighestBid}</p>
+                                )}
+
+                                {!item.isClosed && (
+                                    <div className="auction-bid-section">
+                                        <div className="bid-input-group">
+                                            <span className="bid-currency">$</span>
+                                            <input
+                                                type="number"
+                                                step="0.01"
+                                                min={item.startingPrice}
+                                                placeholder="Enter bid amount"
+                                                value={bidAmounts[item.id] || ''}
+                                                onChange={(e) => handleBidChange(item.id, e.target.value)}
+                                                className="bid-input"
+                                                disabled={biddingItem === item.id || !canBid}
+                                            />
+                                        </div>
+                                        <button
+                                            onClick={() => handlePlaceBid(item.id)}
+                                            className="btn btn-primary bid-button"
+                                            disabled={biddingItem === item.id || !bidAmounts[item.id] || !canBid}
+                                        >
+                                            {biddingItem === item.id ? (
+                                                <>
+                                                    <span className="loading"></span>
+                                                    Placing Bid...
+                                                </>
+                                            ) : (
+                                                'Place Bid'
+                                            )}
+                                        </button>
+                                        
+                                    </div>
+                                )}
 
                                 {/* Admin Controls */}
                                 {role === 'Admin' && (
