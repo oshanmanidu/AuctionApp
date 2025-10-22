@@ -134,6 +134,79 @@ export default function AuctionList() {
         };
     }, []);
 
+    // PayPal Button Rendering Effect
+    useEffect(() => {
+        const loadPayPal = async () => {
+            // Only load PayPal for closed auctions where current user is the winner
+            const winnerItems = items.filter(item => 
+                item.isClosed && item.winnerEmail === localStorage.getItem('email')
+            );
+
+            if (winnerItems.length === 0) return;
+
+            const script = document.createElement('script');
+            script.src = 'https://www.paypal.com/sdk/js?client-id=AUI3HOzUZNnbi79Vu9M3_PyoU6js32F-ewk2-S4VmPA8z6bJh5o-gPfhSD_NdexqgLkPPgTcXs4wfWTx&currency=USD';
+            script.onload = () => {
+                // Render PayPal buttons for each winner item
+                winnerItems.forEach(item => {
+                    const containerId = `paypal-button-container-${item.id}`;
+                    const container = document.getElementById(containerId);
+                    
+                    if (container) {
+                        // Clear existing content
+                        container.innerHTML = '';
+                        
+                        // Render PayPal button
+                        window.paypal.Buttons({
+                            createOrder: (data, actions) => {
+                                return actions.order.create({
+                                    purchase_units: [{
+                                        amount: {
+                                            value: item.winningBidAmount?.toFixed(2),
+                                            currency_code: 'USD'
+                                        },
+                                        description: `Payment for ${item.name}`
+                                    }]
+                                });
+                            },
+                            onApprove: async (data, actions) => {
+                                const order = await actions.order.capture();
+                                alert(`Payment successful! Order ID: ${order.id}`);
+
+                                // Optional: Notify backend
+                                try {
+                                    await api.post('/payments/confirm', {
+                                        orderId: order.id,
+                                        auctionItemId: item.id,
+                                        payerEmail: order.payer.email_address
+                                    });
+                                    setItems(prev => prev.map(i =>
+                                        i.id === item.id ? { ...i, paid: true } : i
+                                    ));
+                                } catch (err) {
+                                    console.error("Failed to confirm payment");
+                                }
+                            },
+                            onError: (err) => {
+                                alert("Payment failed. Please try again.");
+                                console.error(err);
+                            }
+                        }).render(`#${containerId}`);
+                    }
+                });
+            };
+            document.body.appendChild(script);
+
+            return () => {
+                if (document.body.contains(script)) {
+                    document.body.removeChild(script);
+                }
+            };
+        };
+
+        loadPayPal();
+    }, [items]);
+
     const handleBidChange = (itemId, value) => {
         setBidAmounts(prev => ({
             ...prev,
@@ -309,9 +382,36 @@ export default function AuctionList() {
                                     <p>🚫 Bidding not started</p>
                                 )}
 
-                                <p>
-                                    <strong>Highest Bid:</strong> ${item.currentHighestBid}
-                                </p>
+                                {item.isClosed ? (
+                                    <div style={{ 
+                                        marginTop: '1rem', 
+                                        padding: '0.75rem', 
+                                        backgroundColor: '#d4edda', 
+                                        color: '#155724', 
+                                        borderRadius: '6px', 
+                                        fontWeight: 'bold', 
+                                        fontSize: '1.1em' 
+                                    }}>
+                                        🏆 Winner: <span style={{ color: '#004085' }}>{item.winnerEmail}</span><br />
+                                        💰 Winning Bid: <span style={{ color: '#c38b00' }}>${item.winningBidAmount?.toFixed(2)}</span>
+                                    </div>
+                                ) : (
+                                    <p>Bidding Open! Current Highest: ${item.currentHighestBid}</p>
+                                )}
+
+                                {/* Payment Section for Winners */}
+                                {item.isClosed && item.winnerEmail === localStorage.getItem('email') && (
+                                    <div style={{ marginTop: '1rem' }}>
+                                        <h4>✅ You won this auction!</h4>
+                                        <p>Please complete your payment:</p>
+                                        {/* PayPal Button */}
+                                        <div id={`paypal-button-container-${item.id}`}></div>
+                                    </div>
+                                )}
+
+                                {item.isClosed && item.winnerEmail !== localStorage.getItem('email') && (
+                                    <p>Auction ended. {item.winnerEmail} won.</p>
+                                )}
 
                                 <div className="auction-bid-section">
                                     <div className="bid-input-group">

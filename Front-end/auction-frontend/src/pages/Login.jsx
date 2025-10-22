@@ -20,7 +20,7 @@ export default function Login() {
             localStorage.setItem('role', res.data.role);
             localStorage.setItem('email', res.data.email); // ← Store email
 
-            navigate(res.data.role === 'Admin' ? '/admin' : '/auctions');
+            navigate('/home');
         } catch (err) {
             setError('Invalid credentials. Please try again.');
         } finally {

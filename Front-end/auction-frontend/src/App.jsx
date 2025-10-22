@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import HomePage from './pages/HomePage';
 import AuctionList from './pages/AuctionList';
 import AddAuction from './pages/AddAuction';
 import AdminDashboard from './pages/AdminDashboard';
@@ -22,6 +23,10 @@ export default function App() {
                         element={null} // No navbar on register
                     />
                     <Route
+                        path="/home"
+                        element={null} // No navbar on homepage (has its own navbar)
+                    />
+                    <Route
                         path="*"
                         element={<Navbar />} // Show navbar on all other routes
                     />
@@ -32,6 +37,16 @@ export default function App() {
                         {/* Public Routes */}
                         <Route path="/" element={<Login />} />
                         <Route path="/register" element={<Register />} />
+
+                        {/* Homepage Route */}
+                        <Route
+                            path="/home"
+                            element={
+                                <ProtectedRoute allowedRoles={['User', 'Admin']}>
+                                    <HomePage />
+                                </ProtectedRoute>
+                            }
+                        />
 
                         {/* User and Admin Routes */}
                         <Route
